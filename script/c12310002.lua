@@ -1,19 +1,24 @@
 --Tech Generation
---Scripted by UNMEI
+--Scripted by UNMEI for Itsu RP
 local s,id=GetID()
+--START SETUP FUNCTIONS
+Duel.LoadScript("unmeiFuncs.lua")
+
+--END SETUP FUNCTIONS
+
 function s.initial_effect(c)
-	aux.AddVrainsSkillProcedure(c,s.flipcon,s.flipop)
+	unmei.AddUnmeiSkillProcedure(c,s.flipcon,s.flipop,EVENT_UNMEI_NOCHAIN)
+	--aux.AddVrainsSkillProcedure(c,s.flipcon,s.flipop,EVENT_FREE_CHAIN)
+	--aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
 end
 s.listed_series={0x27}
-function s.tkfilter(c)
-	return c:IsSetCard(0x27) and c:IsAbleToHand()
-end
 function s.filter(c)
-	return c:IsSetCard(0x27) and c:IsAbleToHand()
+	return (unmei.IsArchetypeListed(c,0x27) or c:IsSetCard(0x27)) and c:IsAbleToHand() 
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition
-	return true
+	if Duel.GetFlagEffect(ep,id)>0 then return end
+	return aux.CanActivateSkill(tp)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	--opd check and ask if you want to activate the skill or not
@@ -32,7 +37,6 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoDeck(g,nil,1,REASON_COST)
 	
 	Duel.BreakEffect()
-	
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
