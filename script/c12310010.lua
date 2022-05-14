@@ -2,7 +2,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon procedure
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,aux.FilterSummonCode(2403771),1,1)
+	--Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,aux.FilterSummonCode(2403771),1,1)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,aux.FilterSummonCode(02403771),1,1)
 	c:EnableReviveLimit()
 	--equip on summon
 	local e1=Effect.CreateEffect(c)
