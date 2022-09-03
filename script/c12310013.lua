@@ -1,5 +1,5 @@
---超重神鬼シュテンドウ－G
---Superheavy Samurai Ogre Shutendoji
+--Superheavy Samurai Swordsmith Musashi
+--Scripted by UNMEI for Itsu RP
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
